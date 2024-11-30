@@ -14,21 +14,11 @@ async def get_users():
     return users
 
 
-# @app.post("/user/{username}/{age}")
-# async def create_user(username: str, age: int):
-#     user_id = str(int(max(users, key=int)) + 1)
-#     users[user_id] = f"Имя: {username}, возраст: {age}"
-#     return f"User {user_id} is registered"
-
-@app.post('/user/{username}/{age}')
-async def post_user(
-    username: Annotated[str, Path(min_length=5, max_length=20,
-                                  description='Enter username', example='UrbanUser')],
-    age: Annotated[int, Path(le=120, ge=18, description='Enter age', example='24')]
-):
+@app.post("/user/{username}/{age}")
+async def create_user(username: str, age: int):
     user_id = str(int(max(users, key=int)) + 1)
-    users.update({user_id: f'Имя: {username}, возраст: {age}'})
-    return f'User {user_id} is registered'
+    users[user_id] = f"Имя: {username}, возраст: {age}"
+    return f"User {user_id} is registered"
 
 
 
